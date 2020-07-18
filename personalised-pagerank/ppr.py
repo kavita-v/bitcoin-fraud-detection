@@ -3,10 +3,10 @@ from collections import defaultdict
 import json
 
 # Load transaction graph data from tsv file
-tsv_path = "./pp-data/sample-graph.tsv"
-df = pd.read_csv(tsv_path, sep='\t', header=0)
+graph_path = "./pp-data/txedges.dat"
+df = pd.read_csv(graph_path, sep=r"\s+", names=['txid', 'inaddr', 'outaddr', 'weight'])
 
-scam_tsv_path = "./pp-data/sample-fraud-nodes.tsv"
+scam_tsv_path = "./pp-data/scam-data-txid.tsv"
 df_scam = pd.read_csv(scam_tsv_path, sep='\t', header=0)
 fraud_nodes = list(df_scam['addr'])
 
