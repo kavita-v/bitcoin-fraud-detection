@@ -6,7 +6,7 @@ import json
 graph_path = "./pp-data/txedges.dat"
 df = pd.read_csv(graph_path, sep=r"\s+", names=['txid', 'inaddr', 'outaddr', 'weight'])
 
-scam_tsv_path = "./pp-data/scam-data-txid.tsv"
+scam_tsv_path = "./pp-data/sample-scam-data-txid.tsv"
 df_scam = pd.read_csv(scam_tsv_path, sep='\t', header=0)
 fraud_txs = list(df_scam['addr'])
 
@@ -54,9 +54,10 @@ for run in range(max_iter):
     danglesum = alpha*sum(y[node] for node in dangling_nodes)
     
     for node in y:
-        s = y[node]/outdeg(node) # contribution from one out-edge
-        for nbr in G[node]:
-            y_new[nbr] += alpha*s
+        if node not in dangling_nodes:
+            s = y[node]/outdeg(node) # contribution from one out-edge
+            for nbr in G[node]:
+                y_new[nbr] += alpha*s
         y_new[node] += danglesum*dangling_wts[node] + (1 - alpha)*v[node]
     
     # check convergence - L1 Norm
