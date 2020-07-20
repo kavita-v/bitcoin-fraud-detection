@@ -2,5 +2,5 @@
 
 ## Contributors:
 - Kavita Vaishnaw
-- Kanishk Kalra
+- Kanishk Kalra (https://github.com/kanishkkalra11)
 - Mohit Mina
