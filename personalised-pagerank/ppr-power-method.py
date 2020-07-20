@@ -8,18 +8,25 @@ df = pd.read_csv(graph_path, sep=r"\s+", names=['txid', 'inaddr', 'outaddr', 'we
 
 scam_tsv_path = "./pp-data/scam-data-txid.tsv"
 df_scam = pd.read_csv(scam_tsv_path, sep='\t', header=0)
-fraud_nodes = list(df_scam['addr'])
+fraud_txs = list(df_scam['addr'])
 
 # Data Pre-processing
 G = defaultdict(list)       # G represents graph
+tx_node = defaultdict(list)
 for row in df.itertuples():
     G[row.inaddr].append(row.outaddr)   #directed edge from inaddr to outaddr
     G[row.outaddr]                      #to ensure dangling nodes (out-degree=0) have an empty list
+    tx_node[row.txid].append(row.outaddr)
+    tx_node[row.txid].append(row.inaddr)
+
+fraud_nodes = []
+for txid in fraud_txs:
+    fraud_nodes += tx_node[txid]
 
 n = len(G)
 print("No. of nodes in the graph: "+str(n))
 
-m = len(df_scam)
+m = len(fraud_nodes)
 print("No. of preferred nodes (from public scam data): "+str(m))
 
 v = dict() # v is normalized personalisation vector
