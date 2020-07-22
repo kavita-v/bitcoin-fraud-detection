@@ -40,5 +40,20 @@ for i in range(len(df)):
   mat[df['in_addr'][i]][df['out_addr'][i]]=1
   mat[df['out_addr'][i]][df['in_addr'][i]]=1
 
-
+#DFS
+def dfs(G, start, end):
+    stack = [(start, [])]
+    while (stack):
+        state, cycle = stack.pop()
+        for i in G[state]:
+            if i in cycle:
+                continue
+            stack.append((i, cycle+[i]))
+        if cycle and state == end:
+            yield cycle
  
+G = dic_t
+cycles = [[u]+cycle  for u in G for cycle in dfs(G, u, u)]
+print("Number of cycles:",len(cycles))
+print("Cycles:")
+print(cycles)
