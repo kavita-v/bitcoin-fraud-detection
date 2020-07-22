@@ -15,7 +15,6 @@ for i in range(len(df)):
   lis_t.append(temp)
   
 for j in range(len(lis_t)):
-  print(lis_t[j])
   if lis_t[j][0]==lis_t[j][1]:
     lis_t.remove(lis_t[j])
     
