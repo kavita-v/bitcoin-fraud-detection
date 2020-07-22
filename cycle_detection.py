@@ -21,11 +21,14 @@ for j in range(len(lis_t)):
 #Example of dict
 #dic_t = {1: [2], 3: [1], 5: [4]}
 
-dic_t={}
+old_dic_t={}
 for k,v in lis_t:
-  dic_t.setdefault(v,[]).append(k)
-for i in dic_t:
-  dic_t[i]=list(set(dic_t[i]))
+  old_dic_t.setdefault(v,[]).append(k)
+for i in old_dic_t:
+  old_dic_t[i]=list(set(old_dic_t[i]))
+
+dic_t={k: [] for k in range(42790)}
+dic_t.update(old_dic_t)
 
 #Adjacency Matrix
 mat=[]
