@@ -5,7 +5,7 @@ import numpy as np
 
 #reading the txedges.dat
 col_names=['txID', 'in_addr', 'out_addr', 'weight'] 
-df = pd.read_csv('txedges.dat',sep='\t',names=col_names, header=None)
+df = pd.read_csv('pp-data/txedges.dat',sep='\t',names=col_names, header=None)
 
 lis_t=[] 
 for i in range(len(df)):
